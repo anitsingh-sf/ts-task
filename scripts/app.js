@@ -1,32 +1,53 @@
 import { fetchData } from './get.js';
 import { manipulateButtons } from './manipulateButtons.js';
-var Roles;
-(function (Roles) {
-    Roles[Roles["Developer"] = 0] = "Developer";
-    Roles[Roles["Tester"] = 1] = "Tester";
-    Roles[Roles["QA"] = 2] = "QA";
-    Roles[Roles["DevOps"] = 3] = "DevOps";
-})(Roles || (Roles = {}));
+import { newUserEntryMethod } from './newUserEntry.js';
+import { Roles } from './roles.js';
 class user {
     constructor() {
         this.userData = [];
         this.bodyBeforeEditable = document.getElementById("tableBody");
         let selectList = document.createElement("select");
+        let newUserSelectList = document.createElement("select");
         selectList.id = "mySelect";
+        newUserSelectList.id = "newUserSelect";
         for (let i in Roles) {
             if (!isNaN(Number(i))) {
                 let option = document.createElement("option");
+                let newUserOption = document.createElement("option");
                 option.value = i;
                 option.text = Roles[i];
+                newUserOption.value = i;
+                newUserOption.text = Roles[i];
                 selectList.appendChild(option);
+                newUserSelectList.appendChild(newUserOption);
             }
         }
         this.dropdown = selectList;
+        this.dropdownNewUser = newUserSelectList;
+        let idCell = document.getElementById("newUserRole");
+        this.dropdownNewUser.selectedIndex = +Roles[0];
+        idCell.replaceWith(this.dropdownNewUser);
+    }
+    create() {
+        document.getElementById("newEntryTable").style.visibility = "visible";
+        let newUserEntryCell = document.getElementsByClassName("newEntryCol");
+        for (let i = 0; i < newUserEntryCell.length; i++) {
+            newUserEntryCell[i].innerHTML = "";
+        }
+        let saveBtn = document.getElementById("saveButton");
+        let cancelBtn = document.getElementById("cancelButton");
+        if (saveBtn) {
+            saveBtn.addEventListener("click", newUserEntryMethod.save);
+        }
+        if (cancelBtn) {
+            cancelBtn.addEventListener("click", newUserEntryMethod.cancel);
+        }
     }
     async read() {
         this.userData = await fetchData().then(res => res.json());
         document.getElementById("showButton").innerHTML = "Refresh Data";
         document.getElementById("dataTable").style.visibility = "visible";
+        document.getElementById("newEntryButton").style.visibility = "visible";
         let oldBody;
         let newBody;
         let obj, j;
@@ -115,7 +136,7 @@ class user {
         else {
             let currBody = document.getElementById("tableBody");
             currBody.parentNode.replaceChild(this.bodyBeforeEditable, currBody);
-            for (let j = 0; j < this.userData.length; j++) {
+            for (let j = 0; j < currBody.rows.length; j++) {
                 let editBtn = document.getElementById("editButton" + j);
                 let delBtn = document.getElementById("deleteButton" + j);
                 if (editBtn) {
@@ -131,10 +152,14 @@ class user {
     }
 }
 ;
-let logic = new user();
+export let logic = new user();
 document.addEventListener("DOMContentLoaded", function () {
     let btn = document.getElementById("showButton");
     if (btn) {
         btn.addEventListener("click", () => logic.read());
+    }
+    btn = document.getElementById("newEntryButton");
+    if (btn) {
+        btn.addEventListener("click", () => logic.create());
     }
 });

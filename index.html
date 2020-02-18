@@ -33,6 +33,36 @@
                  
             </tbody>
         </table>
+
+        <button type="submit" class="btn btn-primary" id="newEntryButton">Create new user</button>
+        <table class="table table-bordered" id="newEntryTable">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Middle Name</th>
+                    <th>Last Name</th>
+                    <th>E-mail</th>
+                    <th>Phone Number</th>
+                    <th>Role</th>
+                    <th>Address</th>
+                    <th>Save</th>
+                    <th>Cancel</th>
+                </tr>
+            </thead>
+            <tbody id="newEntryTableBody">
+                <tr>
+                    <td contenteditable="true" class="newEntryCol"> <input type="text"> </td>
+                    <td contenteditable="true" class="newEntryCol"> </td>
+                    <td contenteditable="true" class="newEntryCol"> </td>
+                    <td contenteditable="true" class="newEntryCol"> </td>
+                    <td contenteditable="true" class="newEntryCol"> </td>
+                    <td contenteditable="true" id="newUserRole"> </td>
+                    <td contenteditable="true" class="newEntryCol"> </td>
+                    <td> <button type="button" class="edit btn btn-primary" id="saveButton">Save</button></td>
+                    <td> <button type="button" class="delete btn btn-danger" id="cancelButton">Cancel</button></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
