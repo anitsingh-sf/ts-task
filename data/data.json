@@ -1,0 +1,29 @@
+[
+    {
+        "firstName": "John",
+        "middleName": "Smith",
+        "lastName": "Doe",
+        "eMail": "john@sf.com",
+        "phone": "84561",
+        "role": "0",
+        "address": "Chandigarh"
+    },
+    {
+        "firstName": "Anna",
+        "middleName": "Smith",
+        "lastName": "John",
+        "eMail": "anna@sf.com",
+        "phone": "78965",
+        "role": "1",
+        "address": "Mohali"
+    },
+    {
+        "firstName": "Tink",
+        "middleName": "Tong",
+        "lastName": "Tang",
+        "eMail": "ting@sf.com",
+        "phone": "83478",
+        "role": "2",
+        "address": "Panchkula"
+    }
+]
